@@ -1,0 +1,3 @@
+hF6XQPkcF8uFXDI8
+
+mongodb+srv://eliasfrigard:hF6XQPkcF8uFXDI8@cluster0-76vzq.azure.mongodb.net/test?retryWrites=true&w=majority

@@ -25,7 +25,11 @@ router.post('/', async (request, response) => {
   try {
     const savedScore = await score.save()
     response.json(savedScore)
-    console.log('New score added.')
+    console.log('New score added.' + '\n'
+    + 'Title: ' + savedScore.title + '\n'
+    + 'Composer: '+ savedScore.composer + '\n'
+    + 'Origin: '+ savedScore.origin + '\n'
+    )
   } catch (error) {
     response.json({ message: error })
   }

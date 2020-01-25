@@ -7,6 +7,7 @@ router.get('/', async (request, response) => {
   try {
     const score = await Score.find()
     response.json(score)
+    console.log(typeof score)
   } catch (error) {
     response.json({ message: error })
   }
@@ -20,6 +21,7 @@ router.post('/', async (request, response) => {
     origin: request.body.origin,
     path: request.body.path,
     audio: request.body.audio,
+    index: await Score.count() + 1
   })
 
   try {
@@ -35,8 +37,68 @@ router.post('/', async (request, response) => {
   }
 })
 
+// Get random score.
+router.get('/random', async (request, response) => {
+  try {
+    var numberOfScores = 4
+    var scoreCount = await Score.count()
+    var random = []
+    var scores = []
+
+    for (let i = 0; i < scoreCount; i++) {
+      random[i] = i
+    }
+
+    var currentIndex = random.length
+    var temporaryValue
+    var randomIndex
+
+    while (currentIndex !== 0) {
+      randomIndex = Math.floor(Math.random() * currentIndex)
+      currentIndex -= 1
+
+      temporaryValue = random[currentIndex]
+      random[currentIndex] = random[randomIndex]
+      random[randomIndex] = temporaryValue
+    }
+
+    random = random.map(x => x + 1)
+
+    for (let i = 0; i < numberOfScores; i++) {
+      const score = await Score.findOne({ index: random[i] })
+      scores[i] = score
+    }
+
+    response.json(scores)
+    } catch (error) {
+    response.json({ message: error })
+  }
+})
+
+// Get five most recent scores.
+router.get('/recent', async (request, response) => {
+  try {
+    var numberOfScores = 4
+    var scoreCount = await Score.count()
+
+    var scores = []
+
+    for (let i = 0; i < numberOfScores; i++) {
+      const score = await Score.findOne({ index: scoreCount })
+      scoreCount--
+      scores[i] = score
+    }
+
+    response.json(scores)
+  } catch (error) {
+    response.json({ message: error })
+  }
+})
+
+// Get five scores with most likes.
+
 // Get specific score.
-router.get('/:postID', (request, response) => {
+router.get('/:postTitle', (request, response) => {
   try {
     const post = Score.findById(request.params.postID)
     response.json(post)

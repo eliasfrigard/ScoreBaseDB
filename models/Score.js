@@ -31,6 +31,11 @@ const ScoreSchema = mongoose.Schema({
     required: true
   },
 
+  index: {
+    type: Number,
+    required: true
+  },
+
   likes: Number,
 })
 

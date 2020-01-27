@@ -1,17 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const Score = require('../models/Score')
-
-// Get back all scores.
-router.get('/', async (request, response) => {
-  try {
-    const score = await Score.find()
-    response.json(score)
-    console.log(typeof score)
-  } catch (error) {
-    response.json({ message: error })
-  }
-})
+const fuzzysort = require('fuzzysort')
 
 // Submit a score.
 router.post('/', async (request, response) => {
@@ -32,6 +22,16 @@ router.post('/', async (request, response) => {
     + 'Composer: '+ savedScore.composer + '\n'
     + 'Origin: '+ savedScore.origin + '\n'
     )
+  } catch (error) {
+    response.json({ message: error })
+  }
+})
+
+// Get back all scores.
+router.get('/', async (request, response) => {
+  try {
+    const score = await Score.find()
+    response.json(score)
   } catch (error) {
     response.json({ message: error })
   }
@@ -96,6 +96,45 @@ router.get('/recent', async (request, response) => {
 })
 
 // Get five scores with most likes.
+
+// Search for string.
+router.get('/search', async (request, response) => {
+  try {
+    const searchString = request.query.string
+
+    const scores = await Score.find()
+
+    await JSON.parse(scores)
+
+    console.log(scores)
+
+
+
+    const results = fuzzysort.go(searchString, scores, {
+      keys: searchKeys,
+      threshold: -100,
+      limit: 50,
+      allowTypo: true
+    })
+
+    JSON.stringify(results)
+
+    response.json(results)
+    
+/*     var searchResults = []
+
+    results.forEach(result => {
+      result.forEach(post => {
+        if (post) {
+          searchResults.push(post.target)
+        }
+      })
+    }) */
+
+  } catch (error) {
+    response.json(error)
+  }
+})
 
 // Get specific score.
 router.get('/:postTitle', (request, response) => {

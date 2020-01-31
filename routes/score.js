@@ -11,6 +11,12 @@ router.post('/', async (request, response) => {
     origin: request.body.origin,
     path: request.body.path,
     audio: request.body.audio,
+    collections: request.body.collections,
+    type: request.body.type,
+    region: request.body.region,
+    city: request.body.city,
+    key: request.body.key,
+    tags: request.body.tags,
     index: await Score.count() + 1
   })
 
@@ -37,10 +43,21 @@ router.get('/', async (request, response) => {
   }
 })
 
+// Delete all matches
+router.delete('/delete/:id', async (request, response) => {
+  try {
+    console.log(request.params.id)
+    const score = await Score.deleteMany({ title: request.params.id })
+    response.json(score)
+  } catch (error) {
+    response.json({ message: error })
+  }
+})
+
 // Get random score.
 router.get('/random', async (request, response) => {
   try {
-    var numberOfScores = 4
+    var numberOfScores = 20
     var scoreCount = await Score.count()
     var random = []
     var scores = []
@@ -78,7 +95,7 @@ router.get('/random', async (request, response) => {
 // Get five most recent scores.
 router.get('/recent', async (request, response) => {
   try {
-    var numberOfScores = 4
+    var numberOfScores = 20
     var scoreCount = await Score.count()
 
     var scores = []

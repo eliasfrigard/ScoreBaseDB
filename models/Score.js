@@ -36,6 +36,12 @@ const ScoreSchema = mongoose.Schema({
     required: true
   },
 
+  collections: Array,
+  type: String,
+  tags: Array,
+  region:  String,
+  city: String,
+  key: String,
   likes: Number,
 })
 

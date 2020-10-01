@@ -8,7 +8,6 @@ router.post('/', async (request, response) => {
   try {
     // Create a new Score.
     const score = new Score({
-      ID: await Score.count() + 1,
       title: request.body.title,
       composer: request.body.composer,
       songType: request.body.songType,
@@ -18,8 +17,6 @@ router.post('/', async (request, response) => {
       country: request.body.country,
       collections: request.body.collections,
       tags: request.body.tags,
-      scorePath: request.body.scorePath, // Generate these.
-      audioPath: request.body.audioPath, // Generate these.
     })
 
     // Try to save the Score to the Database.
@@ -54,8 +51,6 @@ router.put('/update/:id', async (request, response) => {
     score.country = request.body.country,
     score.collections = request.body.collections,
     score.tags = request.body.tags,
-    score.scorePath = request.body.scorePath, // Generate these.
-    score.audioPath = request.body.audioPath, // Generate these.
   
     await score.save()
   } catch (error) {
@@ -72,6 +67,8 @@ router.get('/', async (request, response) => {
     response.json({ message: error })
   }
 })
+
+router.get
 
 /**
  * Implement different getters for Scores in the future.

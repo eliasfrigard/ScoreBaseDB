@@ -1,6 +1,13 @@
 const mongoose = require('mongoose')
 
+/**
+ * This is the schema for Scores and required attributes.
+ */
 const ScoreSchema = mongoose.Schema({
+  ID: {
+    type: String,
+  },
+
   title: {
     type: String,
     required: true,
@@ -8,41 +15,51 @@ const ScoreSchema = mongoose.Schema({
 
   composer: {
     type: String,
-    default: 'Traditional'
+    required: true,
   },
 
-  origin: {
+  songType: {
     type: String,
-    default: 'Unknown'
+    required: true,
   },
 
-  date: {
+  songKey: {
+    type: String,
+    required: true,
+  },
+
+  location: {
+    type: String,
+    required: true,
+  },
+
+  region: {
+    type: String,
+    required: true,
+  },
+
+  country: {
+    type: String,
+    required: true,
+  },
+
+  collections: {
+    type: Array,
+  },
+
+  dateWhenAdded: {
     type: Date,
     default: Date.now
   },
-
-  path: {
-    type: String,
-    required: true
+  
+  collections: {
+    type: Array,
   },
 
-  audio: {
-    type: String,
-    required: true
-  },
-
-  index: {
+  likes: {
     type: Number,
-    required: true
-  },
-
-  collections: Array,
-  type: String,
-  tags: Array,
-  region:  String,
-  city: String,
-  key: String,
-  likes: Number,
+    default: 0,
+  }
 })
 
 module.exports = mongoose.model('Score', ScoreSchema)

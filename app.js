@@ -10,7 +10,10 @@ const path = require('path')
 
 application.use(cors())
 application.use(bodyparser.json())
-application.use(express.static(path.join(__dirname, './static')))
+
+// Serve static assets.
+application.use(express.static(path.join(__dirname, 'static/mxl')))
+application.use(express.static(path.join(__dirname, 'static/midi')))
 
 // Import routes.
 const scoreRoute = require('./routes/score')
@@ -22,7 +25,7 @@ application.use('/email', emailRoute)
 
 // Connect to DB
 mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true }, () =>
-  console.log('Connected to Database!')
+  console.log('Connected to Database!'),
 )
 
 // Listeing to port:

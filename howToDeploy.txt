@@ -1,0 +1,6 @@
+1. Navigate to "Programming Projects" folder.
+2. Use the following command:
+
+scp -r ScoreBaseDB root@165.227.131.136:/home
+
+OBS! Overwrites what is at the remote location.

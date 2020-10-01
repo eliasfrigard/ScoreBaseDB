@@ -1,7 +1,0 @@
-    {
-    	"title": "Vanhoja Pelimannisävelmiä 1",
-    	"composer": "Traditional",
-    	"origin": "Finland",
-    	"path": "URL to scorefile",
-    	"audio": "URL to audiofile"
-    }

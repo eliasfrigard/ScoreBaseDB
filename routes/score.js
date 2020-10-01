@@ -3,73 +3,102 @@ const router = express.Router()
 const Score = require('../models/Score')
 const fuzzysort = require('fuzzysort')
 
-// Submit a score.
+// Post a new Score.
 router.post('/', async (request, response) => {
-  const score = new Score({
-    title: request.body.title,
-    composer: request.body.composer,
-    origin: request.body.origin,
-    path: request.body.path,
-    audio: request.body.audio,
-    collections: request.body.collections,
-    type: request.body.type,
-    region: request.body.region,
-    city: request.body.city,
-    key: request.body.key,
-    tags: request.body.tags,
-    index: await Score.count() + 1
-  })
-
   try {
+    // Create a new Score.
+    const score = new Score({
+      ID: await Score.count() + 1,
+      title: request.body.title,
+      composer: request.body.composer,
+      songType: request.body.songType,
+      songKey: request.body.songKey,
+      location: request.body.location,
+      region: request.body.region,
+      country: request.body.country,
+      collections: request.body.collections,
+      tags: request.body.tags,
+      scorePath: request.body.scorePath, // Generate these.
+      audioPath: request.body.audioPath, // Generate these.
+    })
+
+    // Try to save the Score to the Database.
     const savedScore = await score.save()
     response.json(savedScore)
-    console.log('New score added.' + '\n'
-    + 'Title: ' + savedScore.title + '\n'
-    + 'Composer: '+ savedScore.composer + '\n'
-    + 'Origin: '+ savedScore.origin + '\n'
-    )
   } catch (error) {
     response.json({ message: error })
   }
 })
 
-// Get back all scores.
-router.get('/', async (request, response) => {
-  try {
-    const score = await Score.find()
-    response.json(score)
-  } catch (error) {
-    response.json({ message: error })
-  }
-})
-
-// Delete all matches
+// Remove Score by ID.
 router.delete('/delete/:id', async (request, response) => {
   try {
-    console.log(request.params.id)
-    const score = await Score.deleteMany({ title: request.params.id })
+    const score = await Score.deleteOne({ id: request.params.id })
     response.json(score)
   } catch (error) {
     response.json({ message: error })
   }
 })
 
-// Get random score.
-router.get('/random', async (request, response) => {
+// Update Score by ID.
+router.put('/update/:id', async (request, response) => {
   try {
-    var numberOfScores = 20
-    var scoreCount = await Score.count()
-    var random = []
-    var scores = []
+    let score = await Score.findOne({ id: request.params.id })
 
-    for (let i = 0; i < scoreCount; i++) {
-      random[i] = i
+    score.title = request.body.title,
+    score.composer = request.body.composer,
+    score.songType = request.body.songType,
+    score.songKey = request.body.songKey,
+    score.location = request.body.location,
+    score.region = request.body.region,
+    score.country = request.body.country,
+    score.collections = request.body.collections,
+    score.tags = request.body.tags,
+    score.scorePath = request.body.scorePath, // Generate these.
+    score.audioPath = request.body.audioPath, // Generate these.
+  
+    await score.save()
+  } catch (error) {
+    response.json({ message: error })
+  }
+})
+
+// Return all Scores.
+router.get('/', async (request, response) => {
+  try {
+    const scores = await Score.find()
+    response.json(scores)
+  } catch (error) {
+    response.json({ message: error })
+  }
+})
+
+/**
+ * Implement different getters for Scores in the future.
+ * For now it will suffice with returning the whole score registry.
+ */
+
+// Get X amount of Random Scores.
+router.get('/random', async (request, response) => {
+  var numberOfScores = 20
+  var random = []
+  var scores = []
+  
+  try {
+    // Place all scores in an array.
+    const allScores = await Score.find()
+
+    // All all score ID's to the array.
+    for (let i = 0; i < allScores.length; i++) {
+      random[i] = allScores[i]._id
     }
 
+    // Use randomization algorithm.
     var currentIndex = random.length
     var temporaryValue
     var randomIndex
 
+    // Algorithm randomizes the order of ID's in the array.
     while (currentIndex !== 0) {
       randomIndex = Math.floor(Math.random() * currentIndex)
       currentIndex -= 1
@@ -79,85 +108,25 @@ router.get('/random', async (request, response) => {
       random[randomIndex] = temporaryValue
     }
 
-    random = random.map(x => x + 1)
-
+    // Places X amount of Scores from the start of the list to be returned.
     for (let i = 0; i < numberOfScores; i++) {
-      const score = await Score.findOne({ index: random[i] })
+      const score = await Score.findOne({ _id: random[i] })
       scores[i] = score
     }
 
+    // Respond with the Score array.
     response.json(scores)
     } catch (error) {
     response.json({ message: error })
   }
 })
 
-// Get five most recent scores.
+// Get X amount of most recent scores.
 router.get('/recent', async (request, response) => {
+  var numberOfScores = 20
+
   try {
-    var numberOfScores = 20
-    var scoreCount = await Score.count()
-
-    var scores = []
-
-    for (let i = 0; i < numberOfScores; i++) {
-      const score = await Score.findOne({ index: scoreCount })
-      scoreCount--
-      scores[i] = score
-    }
-
-    response.json(scores)
-  } catch (error) {
-    response.json({ message: error })
-  }
-})
-
-// Get five scores with most likes.
-
-// Search for string.
-router.get('/search', async (request, response) => {
-  try {
-    const searchString = request.query.string
-
-    const scores = await Score.find()
-
-    await JSON.parse(scores)
-
-    console.log(scores)
-
-
-
-    const results = fuzzysort.go(searchString, scores, {
-      keys: searchKeys,
-      threshold: -100,
-      limit: 50,
-      allowTypo: true
-    })
-
-    JSON.stringify(results)
-
-    response.json(results)
-    
-/*     var searchResults = []
-
-    results.forEach(result => {
-      result.forEach(post => {
-        if (post) {
-          searchResults.push(post.target)
-        }
-      })
-    }) */
-
-  } catch (error) {
-    response.json(error)
-  }
-})
-
-// Get specific score.
-router.get('/:postTitle', (request, response) => {
-  try {
-    const post = Score.findById(request.params.postID)
-    response.json(post)
+    Score.find().sort({ dateWhenAdded: -1 }).limit(numberOfScores)
   } catch (error) {
     response.json({ message: error })
   }

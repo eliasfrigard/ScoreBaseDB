@@ -12,7 +12,7 @@ body {
   color: white;
   text-align: center;
 
-  background-image: url("67.207.75.219:8080/uploadBck");
+  background-image: url("http://67.207.75.219:8080/uploadBck");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;

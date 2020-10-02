@@ -20,10 +20,13 @@ router.post('/', async (request, response) => {
       tags: request.body.tags,
     })
 
+	console.log(score)
+
     // Try to save the Score to the Database.
     const savedScore = await score.save()
     response.json(savedScore)
   } catch (error) {
+	console.log(error)
     response.json({ message: error })
   }
 })
@@ -40,6 +43,8 @@ router.delete('/delete/:id', async (request, response) => {
 
 // Update Score by ID.
 router.put('/update/:id', async (request, response) => {
+  console.log("Trying to add Score.");
+
   try {
     let score = await Score.findOne({ id: request.params.id })
 

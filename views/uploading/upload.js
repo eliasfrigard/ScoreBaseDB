@@ -10,8 +10,6 @@ submitBtn.addEventListener('click', event => {
   let locationValue = document.querySelector('#location').value
   let regionValue = document.querySelector('#region').value
   let countryValue = document.querySelector('#country').value
-  let collectionsValue = document.querySelector('#collections').value
-  let tagsValue = document.querySelector('#tags').value
   const fileValue = document.querySelector('#file').files[0]
 
   var dataComplete = true;
@@ -60,14 +58,14 @@ submitBtn.addEventListener('click', event => {
     const scoreData = {
       title: titleValue,
       composer: composerValue,
-      songtype: songtypeValue,
-      songkey: songkeyValue,
+      songType: songtypeValue,
+      songKey: songkeyValue,
       location: locationValue,
       region: regionValue,
       country: countryValue,
-      collections: collectionsValue,
-      tags: tagsValue
     }
+
+	console.log(JSON.stringify(scoreData))
 
     window.fetch('/score', {
       method: 'POST',

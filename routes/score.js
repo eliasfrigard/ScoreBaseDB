@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const Score = require('../models/Score')
 const fuzzysort = require('fuzzysort')
+// const multer = require('multer')
 
 // Post a new Score.
 router.post('/', async (request, response) => {

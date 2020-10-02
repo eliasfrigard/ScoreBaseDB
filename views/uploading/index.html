@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload Form</title>
+
+  <script type="module" src="67.207.75.219:8080/uploadJS"></script>
+
+  <link rel="stylesheet" href="67.207.75.219:8080/uploadStyle">
+  <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <h1 id="pageTitle">ScoreBase Upload</h1>
+    
+    <div>
+        <form id="uploadForm" action="">
+            <div class="row">
+                <div id="colLeft">
+                    <input type="text" name="title" id="title" placeholder="Title" required>
+                    <input type="text" name="composer" id="composer" placeholder="Composer" required>
+                    <input type="text" name="type" id="songType" placeholder="Song Type" required>
+                    <input type="text" name="key" id="songKey" placeholder="Song Key" required>
+                    <input type="file" name="file" id="file" required>
+                    <label for="file">Choose A File</label>
+                    <p id="noFile">No File Selected!</p>
+                </div>
+                <div id=colRight>
+                    <input type="text" name="location" id="location" placeholder="Location" required>
+                    <input type="text" name="region" id="region" placeholder="Region" required>
+                    <input type="text" name="country" id="country" placeholder="Country" required>
+                    <input type="text" name="Collections" id="collections" placeholder="Collections">
+                    <input type="text" name="tags" id="tags" placeholder="Tags">
+                </div>
+            </div>
+            <input type="submit" value="SUBMIT" id="submit">
+            <p id="success">Success!</p>
+            <p id="fail">Upload Failed.</p>
+        </form>
+    </div>
+</body>
+</html>

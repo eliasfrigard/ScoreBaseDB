@@ -1,4 +1,3 @@
-const databaseURL = '67.207.75.219:8080/score'
 const submitBtn = document.querySelector('#submit')
 
 submitBtn.addEventListener('click', event => {
@@ -70,7 +69,7 @@ submitBtn.addEventListener('click', event => {
       tags: tagsValue
     }
 
-    window.fetch(databaseURL, {
+    window.fetch('/score', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

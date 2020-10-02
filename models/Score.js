@@ -51,7 +51,7 @@ const ScoreSchema = mongoose.Schema({
     type: Date,
     default: Date.now
   },
-  
+
   tags: {
     type: Array,
   },

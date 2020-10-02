@@ -52,7 +52,7 @@ const ScoreSchema = mongoose.Schema({
     default: Date.now
   },
   
-  collections: {
+  tags: {
     type: Array,
   },
 

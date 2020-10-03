@@ -1,5 +1,3 @@
-var fs = require ("fs")
-
 const submitBtn = document.querySelector('#submit')
 
 submitBtn.addEventListener('click', event => {
@@ -43,15 +41,12 @@ submitBtn.addEventListener('click', event => {
     dataComplete = false;
   }
   
-  if (regionValue === "" || locationValue.length > 50) {
+  if (regionValue === "" || regionValue.length > 50) {
     document.querySelector('#region').style.border = "3px solid red"
     dataComplete = false;
   }
 
-  if (countryValue === "" || locationValue.length > 50) {
-    var countryText = fs.readFileSync("./countries.txt")
-    var countryText = countryText.split("\n")    
-
+  if (countryValue === "" || countryValue.length > 50 || !countries.includes(countryValue.toLowerCase())) {
     document.querySelector('#country').style.border = "3px solid red"
     dataComplete = false;
   }
@@ -75,6 +70,8 @@ submitBtn.addEventListener('click', event => {
   } */
 
   if (dataComplete) {
+    upload(fileValue)
+
     const scoreData = {
       title: titleValue,
       composer: composerValue,
@@ -103,10 +100,55 @@ submitBtn.addEventListener('click', event => {
   }
 })
 
+const upload = file => {
+  window.fetch('/score/file', {
+    method: 'POST',
+    body: file
+  }).then(
+    response => response.json() // if the response is a JSON object
+  ).then(
+    success => console.log(success) // Handle the success response object
+  ).catch(
+    error => console.log(error) // Handle the error response object
+  )
+}
+
 const countries = [
-  "Afghanistan",
-  "Albania",
-  "Algeria",
-  "Andorra",
-  "Angola",
+  "sweden",
+  "finland",
+  "norway",
+  "denmark",
+  "estonia",
+  "russia",
+  "france",
+  "italy",
+  "scotland",
+  "wales",
+  "england",
+  "ireland",
+  "usa",
+  "canada",
+  "united kingdoms",
+  "poland",
+  "germany",
+  "belgium",
+  "netherlands",
+  "spain",
+  "greece",
+  "albania",
+  "turkey",
+  "armenia",
+  "andorra",
+  "austria",
+  "belarus",
+  "croatia",
+  "cyprus",
+  "czechia",
+  "latvia",
+  "iceland",
+  "portugal",
+  "romania",
+  "slovakia",
+  "slovenia",
+  "switzerland",
 ]

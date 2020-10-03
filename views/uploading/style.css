@@ -5,20 +5,22 @@
 }
 
 body {
-  width: 100%;
-  height: 100vh;
-  
   font-family: 'Poppins', sans-serif;
   color: white;
   text-align: center;
+}
+
+.pageView {
+  width: 100%;
+  height: 100vh;
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
   background: rgb(12,8,85);
   background: radial-gradient(circle, rgba(12,8,85,1) 0%, rgba(12,8,49,1) 100%);  
   letter-spacing: 1px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
 }
 
 h1 {
@@ -142,14 +144,14 @@ input[type=submit]:hover {
   justify-content: space-around;
 }
 
-#colLeft {
+.colLeft {
   width: 45%;
   display:flex;
   flex-direction: column;
   align-items: flex-end;
 }
 
-#colRight {
+.colRight {
   width: 45%;
   display:flex;
   flex-direction: column;
@@ -172,4 +174,8 @@ input[type=submit]:hover {
   opacity: 0;
   margin: 10px;
   color: red;
+}
+
+#instructionList p {
+  margin: 20px;
 }

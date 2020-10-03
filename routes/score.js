@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const Score = require('../models/Score')
 const fuzzysort = require('fuzzysort')
+const fs = require('fs')
 // const multer = require('multer')
 
 // Post a new Score.
@@ -133,6 +134,10 @@ router.get('/recent', async (request, response) => {
   } catch (error) {
     response.json({ message: error })
   }
+})
+
+router.post('/file', async (request, response) => {
+  console.log(request.body);
 })
 
 module.exports = router

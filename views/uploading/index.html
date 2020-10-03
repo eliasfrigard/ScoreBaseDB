@@ -16,32 +16,49 @@
 </head>
 <body>
 
-    <h1 id="pageTitle">ScoreBase Upload</h1>
-    
-    <div>
-        <form id="uploadForm" action="">
-            <div class="row">
-                <div id="colLeft">
-                    <input type="text" name="title" id="title" placeholder="Title" required>
-                    <input type="text" name="composer" id="composer" placeholder="Composer" required>
-                    <input type="text" name="type" id="songType" placeholder="Song Type" required>
-                    <input type="text" name="key" id="songKey" placeholder="Song Key" required>
-                    <input type="file" name="file" id="file" required>
-                    <label for="file">Choose A File</label>
-                    <p id="noFile">No File Selected!</p>
+    <div id=upload class="pageView">
+        <h1 id="pageTitle">ScoreBase Upload</h1>
+        <div>
+            <form id="uploadForm" action="">
+                <div class="row">
+                    <div class="colLeft">
+                        <input type="text" name="title" id="title" placeholder="Title" required>
+                        <input type="text" name="composer" id="composer" placeholder="Composer" required>
+                        <input type="text" name="type" id="songType" placeholder="Song Type" required>
+                        <input type="text" name="key" id="songKey" placeholder="Song Key" required>
+                        <input type="file" name="file" id="file" required>
+                        <label for="file">Choose A File</label>
+                        <p id="noFile">No File Selected!</p>
+                    </div>
+                    <div class=colRight>
+                        <input type="text" name="location" id="location" placeholder="Location" required>
+                        <input type="text" name="region" id="region" placeholder="Region" required>
+                        <input type="text" name="country" id="country" placeholder="Country" required>
+                        <input type="text" name="Collections" id="collections" placeholder="Collections">
+                        <input type="text" name="tags" id="tags" placeholder="Tags">
+                    </div>
                 </div>
-                <div id=colRight>
-                    <input type="text" name="location" id="location" placeholder="Location" required>
-                    <input type="text" name="region" id="region" placeholder="Region" required>
-                    <input type="text" name="country" id="country" placeholder="Country" required>
-                    <input type="text" name="Collections" id="collections" placeholder="Collections">
-                    <input type="text" name="tags" id="tags" placeholder="Tags">
-                </div>
-            </div>
-            <input type="submit" value="SUBMIT" id="submit">
-            <p id="success">Success!</p>
-            <p id="fail">Upload Failed.</p>
-        </form>
+                <input type="submit" value="SUBMIT" id="submit">
+                <p id="success">Success!</p>
+                <p id="fail">Upload Failed.</p>
+            </form>
+        </div>
+    </div>
+
+    <div id="instructions" class="pageView">
+        <h1>Instructions</h1>
+        <div id="instructionList">
+            <p>2. Specify only one value in each field (except for Collections and Tags).</p>
+            <p>3. Uploaded files should be .mxl (compressed XML) format only.</p>
+            <p>4. Song Key should be "A, D, Cm, F#m" etc. If you want to specify e.g. "Lydian", do so in the Tags section.</p>
+            <p>1. Title, Composer, Song Type, Location, Region & Country can be max 50 characters long (including whitespace).</p>
+            <p>6. Collections speicify the origin of the tune, e.g. "Vanhoja Pelimannisävelmiä" or "Svenska Låtar".</p>
+            <p>7. Additional information should be placed in the Tags section. </p>
+            <p>2. Collections and Tags can take multiple values, which should be separated by commas.</p>
+            <p>7. If you make a mistake or want to change something, contact the admin.</p>
+        </div>
+        <ol list-style-type:upper-roman >
+        </ol>
     </div>
 </body>
 </html>

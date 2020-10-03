@@ -103,6 +103,7 @@ submitBtn.addEventListener('click', event => {
 })
 
 const upload = file => {
+  console.log(file)
   const fd = new FormData()
   fd.append('score', file)
 

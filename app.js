@@ -29,10 +29,6 @@ application.get('/uploadJS', async (req, res) => {
   res.sendFile(__dirname + '/views/uploading/upload.js')
 })
 
-application.get('/uploadBck', async (req, res) => {
-  res.sendFile(__dirname + '/views/uploading/background.jpg')
-})
-
 // Import routes.
 const scoreRoute = require('./routes/score')
 const emailRoute = require('./routes/email')

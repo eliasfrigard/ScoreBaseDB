@@ -12,10 +12,8 @@ body {
   color: white;
   text-align: center;
 
-  background-image: url("http://67.207.75.219:8080/uploadBck");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
+  background: rgb(12,8,85);
+  background: radial-gradient(circle, rgba(12,8,85,1) 0%, rgba(12,8,49,1) 100%);  
   letter-spacing: 1px;
 
   display: flex;

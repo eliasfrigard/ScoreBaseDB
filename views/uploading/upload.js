@@ -14,6 +14,7 @@ submitBtn.addEventListener('click', event => {
   let tagsValue = document.querySelector('#tags').value
   const fileValue = document.querySelector('#file').files[0]
 
+  console.log(document.querySelector('#file').files[0]);
   upload(document.querySelector('#file').files[0])
 
   var dataComplete = true;

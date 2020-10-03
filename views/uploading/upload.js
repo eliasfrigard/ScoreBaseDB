@@ -1,3 +1,5 @@
+var fs = require ("fs")
+
 const submitBtn = document.querySelector('#submit')
 
 submitBtn.addEventListener('click', event => {
@@ -16,39 +18,52 @@ submitBtn.addEventListener('click', event => {
 
   var dataComplete = true;
 
-  if (titleValue === "") {
+  if (titleValue === "" || titleValue.length > 50) {
     document.querySelector('#title').style.border = "3px solid red"
     dataComplete = false;
   }
   
-  if (composerValue === "") {
+  if (composerValue === "" || composeValue.length > 50) {
     document.querySelector('#composer').style.border = "3px solid red"
     dataComplete = false;
   }
   
-  if (songtypeValue === "") {
+  if (songtypeValue === "" || songtypeValue.length > 50) {
     document.querySelector('#songType').style.border = "3px solid red"
     dataComplete = false;
   }
   
-  if (songkeyValue === "") {
+  if (songkeyValue === "" || songkeyValue.length > 3) {
     document.querySelector('#songKey').style.border = "3px solid red"
     dataComplete = false;
   }
   
-  if (locationValue === "") {
+  if (locationValue === "" || locationValue.length > 50) {
     document.querySelector('#location').style.border = "3px solid red"
     dataComplete = false;
   }
   
-  if (regionValue === "") {
+  if (regionValue === "" || locationValue.length > 50) {
     document.querySelector('#region').style.border = "3px solid red"
     dataComplete = false;
   }
 
-  if (countryValue === "") {
+  if (countryValue === "" || locationValue.length > 50) {
+    var countryText = fs.readFileSync("./countries.txt")
+    var countryText = countryText.split("\n")    
+
     document.querySelector('#country').style.border = "3px solid red"
     dataComplete = false;
+  }
+
+  var collectionsArray
+  if (collectionsValue !== "") {
+    collectionsArray = collectionsValue.split(',').map(str => str.trim())    
+  }
+
+  var tagsArray
+  if (tagsValue !== "") {
+    tagsArray = tagsValue.split(',').map(str => str.trim())    
   }
 
   document.querySelector('#submit').style.backgroundColor = 'green'
@@ -68,8 +83,8 @@ submitBtn.addEventListener('click', event => {
       location: locationValue,
       region: regionValue,
       country: countryValue,
-      collections: collectionsValue,
-      tags: tagsValue
+      collections: collectionsArray,
+      tags: tagsArray
     }
 
     window.fetch('/score', {
@@ -87,3 +102,11 @@ submitBtn.addEventListener('click', event => {
     })
   }
 })
+
+const countries = [
+  "Afghanistan",
+  "Albania",
+  "Algeria",
+  "Andorra",
+  "Angola",
+]

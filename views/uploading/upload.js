@@ -74,7 +74,9 @@ submitBtn.addEventListener('click', event => {
       },
       body: JSON.stringify(scoreData)
     }).then(() => {
-        document.querySelector('#success').style.opacity = '100'
+	document.querySelector('#submit').style.backgroundColor = 'green'
+	document.querySelector('#submit').value = 'SUCCESS!'
+        setTimeout(function() { location.reload() }, 1500)
     }).catch(() => {
         document.querySelector('#fail').style.opacity = '100'
     })

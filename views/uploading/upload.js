@@ -14,6 +14,8 @@ submitBtn.addEventListener('click', event => {
   let tagsValue = document.querySelector('#tags').value
   const fileValue = document.querySelector('#file').files[0]
 
+  upload(fileValue)
+
   var dataComplete = true;
 
   if (titleValue === "" || titleValue.length > 50) {

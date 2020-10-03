@@ -103,9 +103,12 @@ submitBtn.addEventListener('click', event => {
 })
 
 const upload = file => {
+  const fd = new FormData()
+  fd.append('score', file)
+
   window.fetch('/score/file', {
     method: 'POST',
-    body: file
+    body: fd
   }).then(
     response => response.json() // if the response is a JSON object
   ).then(

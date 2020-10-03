@@ -4,7 +4,7 @@ const Score = require('../models/Score')
 const fuzzysort = require('fuzzysort')
 const fs = require('fs')
 const multer = require('multer')
-var upload = multer({ dest: '../static/mxl/' })
+var upload = multer({ dest: '/static/mxl/' })
 
 // Post a new Score.
 router.post('/', async (request, response) => {
@@ -149,7 +149,7 @@ router.post('/file', upload.single('score'), function (request, response, next) 
         let score = request.file;
         
         //Use the mv() method to place the file in upload directory (i.e. "uploads")
-        score.mv('../static/mxl/' + score.originalname);
+        // score.mv('../static/mxl/' + score.originalname);
 
         //send response
         response.send({
@@ -157,8 +157,6 @@ router.post('/file', upload.single('score'), function (request, response, next) 
             message: 'File is uploaded',
             data: {
                 name: score.originalname,
-                mimetype: score.mimetype,
-                size: score.size
             }
         })
     }

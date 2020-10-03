@@ -14,7 +14,7 @@ submitBtn.addEventListener('click', event => {
   let tagsValue = document.querySelector('#tags').value
   const fileValue = document.querySelector('#file').files[0]
 
-  upload(fileValue)
+  upload(document.querySelector('#file').files[0])
 
   var dataComplete = true;
 
@@ -117,22 +117,6 @@ const upload = file => {
   ).catch(
     error => console.log(error) // Handle the error response object
   )
-}
-
-const uploadFile = (file) => {
-
-  // add file to FormData object
-  const fd = new FormData();
-  fd.append('avatar', file);
-
-  // send `POST` request
-  fetch('/upload-avatar', {
-      method: 'POST',
-      body: fd
-  })
-  .then(res => res.json())
-  .then(json => console.log(json))
-  .catch(err => console.error(err));
 }
 
 const countries = [

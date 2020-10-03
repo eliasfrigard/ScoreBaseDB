@@ -139,14 +139,14 @@ router.get('/recent', async (request, response) => {
 router.post('/file', async (request, response) => {
   console.log(request.files);
   try {
-    if (!request.files) {
+    if (!request.files.get('score')) {
       response.send({
             status: false,
             message: 'No file uploaded'
         })
     } else {
         //Use the name of the input field (i.e. "avatar") to retrieve the uploaded file
-        let score = request.files.score;
+        let score = request.files.get('score');
         
         //Use the mv() method to place the file in upload directory (i.e. "uploads")
         score.mv('../static/mxl/' + score.name);

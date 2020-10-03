@@ -10,6 +10,8 @@ submitBtn.addEventListener('click', event => {
   let locationValue = document.querySelector('#location').value
   let regionValue = document.querySelector('#region').value
   let countryValue = document.querySelector('#country').value
+  let collectionsValue = document.querySelector('#collections').value
+  let tagsValue = document.querySelector('#tags').value
   const fileValue = document.querySelector('#file').files[0]
 
   var dataComplete = true;
@@ -49,6 +51,9 @@ submitBtn.addEventListener('click', event => {
     dataComplete = false;
   }
 
+  document.querySelector('#submit').style.backgroundColor = 'green'
+
+
 /*   if (fileValue === undefined) {
     document.querySelector('#noFile').style.opacity = '100'
     dataComplete = false;
@@ -63,9 +68,9 @@ submitBtn.addEventListener('click', event => {
       location: locationValue,
       region: regionValue,
       country: countryValue,
+      collections: collectionsValue,
+      tags: tagsValue
     }
-
-	console.log(JSON.stringify(scoreData))
 
     window.fetch('/score', {
       method: 'POST',

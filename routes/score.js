@@ -137,26 +137,26 @@ router.get('/recent', async (request, response) => {
   }
 })
 
-/* router.post('/file', async (request, response) => {
+router.post('/file', upload.single('score'), function (request, response, next) {
   try {
-    if (!request.files) {
+    if (!request.file) {
       response.send({
             status: false,
             message: 'No file uploaded'
         })
     } else {
         //Use the name of the input field (i.e. "avatar") to retrieve the uploaded file
-        let score = request.files.score;
+        let score = request.file;
         
         //Use the mv() method to place the file in upload directory (i.e. "uploads")
-        score.mv('../static/mxl/' + score.name);
+        score.mv('../static/mxl/' + score.originalname);
 
         //send response
         response.send({
             status: true,
             message: 'File is uploaded',
             data: {
-                name: score.name,
+                name: score.originalname,
                 mimetype: score.mimetype,
                 size: score.size
             }
@@ -165,10 +165,10 @@ router.get('/recent', async (request, response) => {
   } catch (err) {
     response.status(500).send(err)
   }
-}) */
-
-router.post('/file', upload.single('score'), function (request, response, next) {
-  console.log(request.file)
 })
 
+/* router.post('/file', upload.single('score'), function (request, response, next) {
+  console.log(request.file)
+})
+ */
 module.exports = router

@@ -3,7 +3,8 @@ const router = express.Router()
 const Score = require('../models/Score')
 const fuzzysort = require('fuzzysort')
 const fs = require('fs')
-// const multer = require('multer')
+const multer = require('multer')
+var upload = multer({ dest: '../static/mxl/' })
 
 // Post a new Score.
 router.post('/', async (request, response) => {
@@ -136,7 +137,7 @@ router.get('/recent', async (request, response) => {
   }
 })
 
-router.post('/file', async (request, response) => {
+/* router.post('/file', async (request, response) => {
   try {
     if (!request.files) {
       response.send({
@@ -164,6 +165,10 @@ router.post('/file', async (request, response) => {
   } catch (err) {
     response.status(500).send(err)
   }
-})
+}) */
+
+router.post('/file', upload.single('score', function (request, response, next) {
+  console.log(request.file)
+}))
 
 module.exports = router

@@ -4,7 +4,7 @@ const Score = require('../models/Score')
 const fuzzysort = require('fuzzysort')
 const fs = require('fs')
 const multer = require('multer')
-var upload = multer({ dest: '/static/mxl/' })
+var upload = multer({ dest: 'ScoreBaseDB/static/mxl/' })
 
 // Post a new Score.
 router.post('/', async (request, response) => {

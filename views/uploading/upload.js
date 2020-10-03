@@ -110,7 +110,6 @@ const upload = file => {
     method: 'POST',
     body: formData,
     mode: 'cors',
-    headers: { 'Content-Type': 'multipart/form-data' },
   }).then(
     response => response.json() // if the response is a JSON object
   ).then(

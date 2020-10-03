@@ -2,11 +2,10 @@ const express = require('express')
 const router = express.Router()
 const Score = require('../models/Score')
 const fuzzysort = require('fuzzysort')
-const fs = require('fs')
 const multer = require('multer')
 var upload = multer({ dest: './static/mxl/' })
 
-// Post a new Score.
+// Post info about a Score to the database.
 router.post('/', async (request, response) => {
   try {
     // Create a new Score.
@@ -30,6 +29,31 @@ router.post('/', async (request, response) => {
   } catch (error) {
 	console.log(error)
     response.json({ message: error })
+  }
+})
+
+// Upload a Score to the server.
+router.post('/file', upload.single('score'), function (request, response, next) {
+  try {
+    if (!request.file) {
+      // Send failed response.
+      response.send({
+            status: false,
+            message: 'No file uploaded'
+        })
+    } else {
+        // Send successful response.
+        response.send({
+            status: true,
+            message: 'File is uploaded',
+            data: {
+                name: request.file.originalname,
+            }
+        })
+    }
+  } catch (err) {
+    // Send error response.
+    response.status(500).send(err)
   }
 })
 
@@ -137,36 +161,4 @@ router.get('/recent', async (request, response) => {
   }
 })
 
-router.post('/file', upload.single('score'), function (request, response, next) {
-  try {
-    if (!request.file) {
-      response.send({
-            status: false,
-            message: 'No file uploaded'
-        })
-    } else {
-        //Use the name of the input field (i.e. "avatar") to retrieve the uploaded file
-        let score = request.file;
-        
-        //Use the mv() method to place the file in upload directory (i.e. "uploads")
-        // score.mv('../static/mxl/' + score.originalname);
-
-        //send response
-        response.send({
-            status: true,
-            message: 'File is uploaded',
-            data: {
-                name: score.originalname,
-            }
-        })
-    }
-  } catch (err) {
-    response.status(500).send(err)
-  }
-})
-
-/* router.post('/file', upload.single('score'), function (request, response, next) {
-  console.log(request.file)
-})
- */
 module.exports = router

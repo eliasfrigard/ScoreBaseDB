@@ -3,8 +3,7 @@ const router = express.Router()
 const Score = require('../models/Score')
 const fuzzysort = require('fuzzysort')
 const fs = require('fs')
-const multer = require('multer')
-var upload = multer({ dest: '../static/mxl/' })
+// const multer = require('multer')
 
 // Post a new Score.
 router.post('/', async (request, response) => {
@@ -137,38 +136,8 @@ router.get('/recent', async (request, response) => {
   }
 })
 
-/* router.post('/file', async (request, response) => {
-  try {
-    if (!request.files) {
-      response.send({
-            status: false,
-            message: 'No file uploaded'
-        })
-    } else {
-        //Use the name of the input field (i.e. "avatar") to retrieve the uploaded file
-        let score = request.files.score;
-        
-        //Use the mv() method to place the file in upload directory (i.e. "uploads")
-        score.mv('../static/mxl/' + score.name);
-
-        //send response
-        response.send({
-            status: true,
-            message: 'File is uploaded',
-            data: {
-                name: score.name,
-                mimetype: score.mimetype,
-                size: score.size
-            }
-        })
-    }
-  } catch (err) {
-    response.status(500).send(err)
-  }
-}) */
-
-router.post('/file', upload.single('score'), function (request, response, next) {
-  console.log(request.file)
+router.post('/file', async (request, response) => {
+  console.log(request.files);
 })
 
 module.exports = router

@@ -106,7 +106,7 @@ const upload = file => {
   const formData = new FormData()
   formData.append('score', file)
 
-  console.log(fd)
+  console.log(formData)
 
   window.fetch('/score/file', {
     method: 'POST',

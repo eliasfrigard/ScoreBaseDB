@@ -137,7 +137,7 @@ router.get('/recent', async (request, response) => {
 })
 
 router.post('/file', async (request, response) => {
-  console.log(request.files.get('score'));
+  console.log(request.files.get('score').name);
   try {
     if (!request.files.get('score')) {
       response.send({

@@ -167,8 +167,8 @@ router.get('/recent', async (request, response) => {
   }
 }) */
 
-router.post('/file', upload.single('score', function (request, response, next) {
-  console.log(request.file)
+router.post('/file', upload.single('score'), function (request, response, next) {
+  console.log(request.file.name)
 }))
 
 module.exports = router

@@ -137,6 +137,7 @@ router.get('/recent', async (request, response) => {
 })
 
 router.post('/file', async (request, response) => {
+  console.log(request);
   try {
     if (!request.files) {
       response.send({

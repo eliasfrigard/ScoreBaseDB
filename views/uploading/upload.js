@@ -108,7 +108,9 @@ const upload = file => {
 
   window.fetch('/score/file', {
     method: 'POST',
-    body: formData
+    body: formData,
+    mode: 'cors',
+    headers: { 'Content-Type': 'multipart/form-data' },
   }).then(
     response => response.json() // if the response is a JSON object
   ).then(

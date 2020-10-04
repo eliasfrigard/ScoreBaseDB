@@ -13,6 +13,11 @@ const ScoreSchema = mongoose.Schema({
     required: true,
   },
 
+  filename: {
+    type: String,
+    required: true,
+  },
+
   composer: {
     type: String,
     required: true,

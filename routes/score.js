@@ -12,6 +12,7 @@ router.post('/', async (request, response) => {
     // Create a new Score.
     const score = new Score({
       title: request.body.title,
+      filename: request.body.filename,
       composer: request.body.composer,
       songType: request.body.songType,
       songKey: request.body.songKey,
@@ -77,6 +78,7 @@ router.put('/update/:id', async (request, response) => {
     let score = await Score.findOne({ id: request.params.id })
 
     score.title = request.body.title,
+    score.filename = request.body.filename,
     score.composer = request.body.composer,
     score.songType = request.body.songType,
     score.songKey = request.body.songKey,

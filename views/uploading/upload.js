@@ -2,62 +2,78 @@ const submitBtn = document.querySelector('#submit')
 const fileBtn = document.querySelector('#file')
 const fileLabel = document.querySelector('#fileLabel')
 
+// Input fields.
+const titleInput = document.querySelector('#title')
+const composerInput = document.querySelector('#composer')
+const songTypeInput = document.querySelector('#songType')
+const songKeyInput = document.querySelector('#songKey')
+const locationInput = document.querySelector('#location')
+const regionInput = document.querySelector('#region')
+const countryInput = document.querySelector('#country')
+const collectionsInput = document.querySelector('#collections')
+const tagsInput = document.querySelector('#tags')
+
+// Method for displaying filename in fileLabel when uploaded.
 fileBtn.addEventListener('change', event => {
   fileLabel.innerText = fileBtn.files[0].name
   fileLabel.style.backgroundColor = 'green'
 })
 
+// This method runs when data is submitted.
 submitBtn.addEventListener('click', event => {
   event.preventDefault()
 
-  let titleValue = document.querySelector('#title').value
-  let composerValue = document.querySelector('#composer').value
-  let songTypeValue = document.querySelector('#songType').value
-  let songKeyValue = document.querySelector('#songKey').value
-  let locationValue = document.querySelector('#location').value
-  let regionValue = document.querySelector('#region').value
-  let countryValue = document.querySelector('#country').value
-  let collectionsValue = document.querySelector('#collections').value
-  let tagsValue = document.querySelector('#tags').value
+  // Get the values from all fields.
+  let titleValue = titleInput.value
+  let composerValue = composerInput.value
+  let songTypeValue = songTypeInput.value
+  let songKeyValue = songKeyInput.value
+  let locationValue = locationInput.value
+  let regionValue = regionInput.value
+  let countryValue = countryInput.value
+  let collectionsValue = collectionsInput.value
+  let tagsValue = tagsInput.value
   const fileValue = fileBtn.files[0]
 
-  var dataComplete = true;
+  // If data is not complete it will not be sent.
+  let dataComplete = true;
 
   if (titleValue === "" || titleValue.length > 50) {
-    document.querySelector('#title').style.border = "3px solid red"
+    titleInput.style.border = "3px solid red"
     dataComplete = false;
   }
   
   if (composerValue === "" || composerValue.length > 50) {
-    document.querySelector('#composer').style.border = "3px solid red"
+    composerInput.style.border = "3px solid red"
     dataComplete = false;
   }
   
   if (songTypeValue === "" || songTypeValue.length > 50) {
-    document.querySelector('#songType').style.border = "3px solid red"
+    songTypeInput.style.border = "3px solid red"
     dataComplete = false;
   }
   
   if (songKeyValue === "" || songKeyValue.length > 3) {
-    document.querySelector('#songKey').style.border = "3px solid red"
+    songKeyInput.style.border = "3px solid red"
     dataComplete = false;
   }
   
   if (locationValue === "" || locationValue.length > 50) {
-    document.querySelector('#location').style.border = "3px solid red"
+    locationInput.style.border = "3px solid red"
     dataComplete = false;
   }
   
   if (regionValue === "" || regionValue.length > 50) {
-    document.querySelector('#region').style.border = "3px solid red"
+    regionInput.style.border = "3px solid red"
     dataComplete = false;
   }
 
   if (countryValue === "" || countryValue.length > 50 || !countries.includes(countryValue.toLowerCase())) {
-    document.querySelector('#country').style.border = "3px solid red"
+    countryInput.style.border = "3px solid red"
     dataComplete = false;
   }
 
+  // Split and trim collections and tags.
   var collectionsArray
   if (collectionsValue !== "") {
     collectionsArray = collectionsValue.split(',').map(str => str.trim())    
@@ -114,8 +130,18 @@ const sendUploadData = scoreData => {
     body: JSON.stringify(scoreData)
   }).then(() => {
     // Print success and reload page.
-    document.querySelector('#submit').style.backgroundColor = 'green'
-    document.querySelector('#submit').value = 'SUCCESS!'
+    submitBtn.value = 'SUCCESS!'
+    submitBtn.style.backgroundColor = 'green'
+    titleInput.style.border = "3px solid green"
+    composerInput.style.border = "3px solid green"
+    songTypeInput.style.border = "3px solid green"
+    songKeyInput.style.border = "3px solid green"
+    locationInput.style.border = "3px solid green"
+    regionInput.style.border = "3px solid green"
+    countryInput.style.border = "3px solid green"
+    collectionsInput.style.border = "3px solid green"
+    tagsInput.style.border = "3px solid green"
+
     setTimeout(function() { location.reload() }, 1500)
   }).catch(() => {
     document.querySelector('#fail').style.opacity = '100'

@@ -4,7 +4,16 @@ const Score = require('../models/Score')
 const fuzzysort = require('fuzzysort')
 const multer = require('multer')
 const path = require('path')
-var upload = multer({ dest: './static/unverified/' })
+
+// Multer storage function.
+var storage = multer.diskStorage({
+  destination: './static/unverified/',
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + '-' + Date.now() + '.mxl')
+  }
+})
+
+var upload = multer({ storage: storage })
 
 // Post info about a Score to the database.
 router.post('/', async (request, response) => {

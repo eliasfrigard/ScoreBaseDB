@@ -3,12 +3,13 @@ const router = express.Router()
 const Score = require('../models/Score')
 const fuzzysort = require('fuzzysort')
 const multer = require('multer')
+const path = require('path')
 var upload = multer({ storage: storage })
 
 var storage = multer.diskStorage({
   destination: './static/mxl/',
   filename: function (req, file, cb) {
-    cb(null, file.fieldname + '-' + Date.now() + '.mxl')
+    cb(null, file.originalname + '-' + Date.now() + path.extname(file.originalname))
   }
 })
 

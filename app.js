@@ -18,9 +18,9 @@ let options = {}
 
 // Serve static assets.
 application.use(express.static('static', options))
-/* application.use(express.static(path.join(__dirname, 'static/mxl')))
+application.use(express.static(path.join(__dirname, 'static/mxl')))
 application.use(express.static(path.join(__dirname, 'static/midi')))
-application.use(express.static(path.join(__dirname, 'static/unverified'))) */
+application.use(express.static(path.join(__dirname, 'static/unverified')))
 
 // Import routes.
 const scoreRoute = require('./routes/score')

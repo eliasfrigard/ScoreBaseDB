@@ -16,6 +16,7 @@ application.use(bodyparser.json())
 // Serve static assets.
 application.use(express.static(path.join(__dirname, 'static/mxl')))
 application.use(express.static(path.join(__dirname, 'static/midi')))
+application.use(express.static(path.join(__dirname, 'static/unverified')))
 
 // Import routes.
 const scoreRoute = require('./routes/score')

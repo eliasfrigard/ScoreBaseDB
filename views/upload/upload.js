@@ -104,7 +104,7 @@ submitBtn.addEventListener('click', event => {
 
 // Method for first uploading the file to the server, then data to the database.
 const upload = (file, scoreData) => {
-  const variable
+  let variable
   const formData = new FormData()
   formData.append('score', file)
 

@@ -114,9 +114,9 @@ const upload = (file, scoreData) => {
   }).then(
     response => response.json() // if the response is a JSON object
   ).then((success) => {
-    console.log(success.data.filename)
+    // Update filename from server and send upload data to database.
     scoreData.filename = success.data.filename
-    console.log(scoreData.filename)
+    sendUploadData(scoreData)
   }).then(
   ).catch(
     error => console.log(error) // Handle the error response object

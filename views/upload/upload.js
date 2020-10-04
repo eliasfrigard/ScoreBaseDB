@@ -85,7 +85,7 @@ submitBtn.addEventListener('click', event => {
   }
 
   if (dataComplete) {
-    const scoreData = {
+    let scoreData = {
       title: titleValue,
       composer: composerValue,
       songType: songTypeValue,

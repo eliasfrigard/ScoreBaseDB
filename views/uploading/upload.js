@@ -15,6 +15,7 @@ const tagsInput = document.querySelector('#tags')
 
 // Method for displaying filename in fileLabel when uploaded.
 fileBtn.addEventListener('change', event => {
+  console.log(fileBtn.files[0].type);
   fileLabel.innerText = fileBtn.files[0].name
   fileLabel.style.backgroundColor = 'green'
 })

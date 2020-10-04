@@ -12,8 +12,8 @@ submitBtn.addEventListener('click', event => {
 
   let titleValue = document.querySelector('#title').value
   let composerValue = document.querySelector('#composer').value
-  let songtypeValue = document.querySelector('#songType').value
-  let songkeyValue = document.querySelector('#songKey').value
+  let songTypeValue = document.querySelector('#songType').value
+  let songKeyValue = document.querySelector('#songKey').value
   let locationValue = document.querySelector('#location').value
   let regionValue = document.querySelector('#region').value
   let countryValue = document.querySelector('#country').value
@@ -28,17 +28,17 @@ submitBtn.addEventListener('click', event => {
     dataComplete = false;
   }
   
-  if (composerValue === "" || composeValue.length > 50) {
+  if (composerValue === "" || composerValue.length > 50) {
     document.querySelector('#composer').style.border = "3px solid red"
     dataComplete = false;
   }
   
-  if (songtypeValue === "" || songtypeValue.length > 50) {
+  if (songTypeValue === "" || songTypeValue.length > 50) {
     document.querySelector('#songType').style.border = "3px solid red"
     dataComplete = false;
   }
   
-  if (songkeyValue === "" || songkeyValue.length > 3) {
+  if (songKeyValue === "" || songKeyValue.length > 3) {
     document.querySelector('#songKey').style.border = "3px solid red"
     dataComplete = false;
   }
@@ -72,8 +72,8 @@ submitBtn.addEventListener('click', event => {
     const scoreData = {
       title: titleValue,
       composer: composerValue,
-      songType: songtypeValue,
-      songKey: songkeyValue,
+      songType: songTypeValue,
+      songKey: songKeyValue,
       location: locationValue,
       region: regionValue,
       country: countryValue,

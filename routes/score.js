@@ -3,7 +3,16 @@ const router = express.Router()
 const Score = require('../models/Score')
 const fuzzysort = require('fuzzysort')
 const multer = require('multer')
-var upload = multer({ dest: './static/mxl/' })
+var upload = multer({ storage: storage })
+
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './static/mxl/')
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + '-' + Date.now() + '.mxl')
+  }
+})
 
 // Post info about a Score to the database.
 router.post('/', async (request, response) => {

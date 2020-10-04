@@ -116,8 +116,8 @@ const upload = (file, scoreData) => {
   ).then((success) => {
     console.log(success.data.filename)
     scoreData.filename = success.data.filename
-  }).then(
     console.log(scoreData.filename)
+  }).then(
   ).catch(
     error => console.log(error) // Handle the error response object
   )

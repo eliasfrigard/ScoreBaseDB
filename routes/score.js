@@ -35,6 +35,8 @@ router.post('/', async (request, response) => {
 // Upload a Score to the server.
 router.post('/file', upload.single('score'), function (request, response, next) {
   try {
+    console.log(request.file.filename);
+
     if (!request.file) {
       // Send failed response.
       response.send({

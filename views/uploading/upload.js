@@ -142,7 +142,9 @@ const sendUploadData = scoreData => {
     collectionsInput.style.border = "3px solid green"
     tagsInput.style.border = "3px solid green"
 
-    setTimeout(function() { location.reload() }, 1500)
+    success => console.log(success)
+
+    setTimeout(function() { location.reload() }, 2500)
   }).catch(() => {
     document.querySelector('#fail').style.opacity = '100'
   })

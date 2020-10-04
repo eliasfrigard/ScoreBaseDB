@@ -1,4 +1,11 @@
 const submitBtn = document.querySelector('#submit')
+const fileBtn = document.querySelector('#file')
+const fileLabel = document.querySelector('fileLabel')
+
+fileBtn.addEventListener('change', event => {
+  fileLabel.innerText = fileBtn.files[0].name
+  fileLabel.style.backgroundColor = 'green'
+})
 
 submitBtn.addEventListener('click', event => {
   event.preventDefault()
@@ -12,10 +19,7 @@ submitBtn.addEventListener('click', event => {
   let countryValue = document.querySelector('#country').value
   let collectionsValue = document.querySelector('#collections').value
   let tagsValue = document.querySelector('#tags').value
-  const fileValue = document.querySelector('#file').files[0]
-
-  console.log(document.querySelector('#file').files[0]);
-  upload(document.querySelector('#file').files[0])
+  const fileValue = fileBtn.files[0]
 
   var dataComplete = true;
 
@@ -64,17 +68,7 @@ submitBtn.addEventListener('click', event => {
     tagsArray = tagsValue.split(',').map(str => str.trim())    
   }
 
-  document.querySelector('#submit').style.backgroundColor = 'green'
-
-
-/*   if (fileValue === undefined) {
-    document.querySelector('#noFile').style.opacity = '100'
-    dataComplete = false;
-  } */
-
   if (dataComplete) {
-    upload(fileValue)
-
     const scoreData = {
       title: titleValue,
       composer: composerValue,
@@ -87,23 +81,12 @@ submitBtn.addEventListener('click', event => {
       tags: tagsArray
     }
 
-    window.fetch('/score', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(scoreData)
-    }).then(() => {
-	document.querySelector('#submit').style.backgroundColor = 'green'
-	document.querySelector('#submit').value = 'SUCCESS!'
-        setTimeout(function() { location.reload() }, 1500)
-    }).catch(() => {
-        document.querySelector('#fail').style.opacity = '100'
-    })
+    upload(fileValue, scoreData)
   }
 })
 
-const upload = file => {
+// Method for first uploading the file to the server, then data to the database.
+const upload = (file, scoreData) => {
   const formData = new FormData()
   formData.append('score', file)
 
@@ -114,10 +97,29 @@ const upload = file => {
   }).then(
     response => response.json() // if the response is a JSON object
   ).then(
+    sendUploadData(scoreData),
     success => console.log(success) // Handle the success response object
   ).catch(
     error => console.log(error) // Handle the error response object
   )
+}
+
+// Sends data to the database.
+const sendUploadData = scoreData => {
+  window.fetch('/score', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(scoreData)
+  }).then(() => {
+    // Print success and reload page.
+    document.querySelector('#submit').style.backgroundColor = 'green'
+    document.querySelector('#submit').value = 'SUCCESS!'
+    setTimeout(function() { location.reload() }, 1500)
+  }).catch(() => {
+    document.querySelector('#fail').style.opacity = '100'
+  })
 }
 
 const countries = [

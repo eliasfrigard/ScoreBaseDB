@@ -17,6 +17,7 @@ application.use(bodyparser.json())
 application.use(express.static(path.join(__dirname, 'static/mxl')))
 application.use(express.static(path.join(__dirname, 'static/midi')))
 
+// Serving upload page, move later.
 application.get('/upload', async (req, res) => {
   res.sendFile(__dirname + '/views/uploading/index.html')
 })
@@ -46,33 +47,3 @@ mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true }, () =>
 
 // Listeing to port:
 application.listen(8080)
-
-application.post('/upload-avatar', async (req, res) => {
-  try {
-      if(!req.files) {
-          res.send({
-              status: false,
-              message: 'No file uploaded'
-          });
-      } else {
-          //Use the name of the input field (i.e. "avatar") to retrieve the uploaded file
-          let avatar = req.files.avatar;
-          
-          //Use the mv() method to place the file in upload directory (i.e. "uploads")
-          avatar.mv('./static/' + avatar.name);
-
-          //send response
-          res.send({
-              status: true,
-              message: 'File is uploaded',
-              data: {
-                  name: avatar.name,
-                  mimetype: avatar.mimetype,
-                  size: avatar.size
-              }
-          });
-      }
-  } catch (err) {
-      res.status(500).send(err);
-  }
-});

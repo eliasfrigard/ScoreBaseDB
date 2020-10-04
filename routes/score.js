@@ -6,9 +6,7 @@ const multer = require('multer')
 var upload = multer({ storage: storage })
 
 var storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, './static/mxl/')
-  },
+  destination: './static/mxl/',
   filename: function (req, file, cb) {
     cb(null, file.fieldname + '-' + Date.now() + '.mxl')
   }

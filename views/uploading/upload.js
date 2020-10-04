@@ -1,6 +1,6 @@
 const submitBtn = document.querySelector('#submit')
 const fileBtn = document.querySelector('#file')
-const fileLabel = document.querySelector('fileLabel')
+const fileLabel = document.querySelector('#fileLabel')
 
 fileBtn.addEventListener('change', event => {
   fileLabel.innerText = fileBtn.files[0].name

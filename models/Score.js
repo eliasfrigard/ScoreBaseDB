@@ -35,12 +35,10 @@ const ScoreSchema = mongoose.Schema({
 
   location: {
     type: String,
-    required: true,
   },
 
   region: {
     type: String,
-    required: true,
   },
 
   country: {

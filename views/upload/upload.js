@@ -58,12 +58,12 @@ submitBtn.addEventListener('click', event => {
     dataComplete = false;
   }
   
-  if (locationValue === "" || locationValue.length > 50) {
+  if (locationValue.length > 50) {
     locationInput.style.border = "3px solid red"
     dataComplete = false;
   }
   
-  if (regionValue === "" || regionValue.length > 50) {
+  if (regionValue.length > 50) {
     regionInput.style.border = "3px solid red"
     dataComplete = false;
   }

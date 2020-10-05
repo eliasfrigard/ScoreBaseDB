@@ -5,6 +5,9 @@ const fuzzysort = require('fuzzysort')
 const multer = require('multer')
 const path = require('path')
 
+// Common variables.
+const numberOfScores = 5
+
 // Multer storage function.
 var storage = multer.diskStorage({
   destination: './static/unverified/',
@@ -113,16 +116,28 @@ router.get('/', async (request, response) => {
   }
 })
 
-router.get
-
 /**
  * Implement different getters for Scores in the future.
  * For now it will suffice with returning the whole score registry.
  */
 
-// Get X amount of Random Scores.
-router.get('/random', async (request, response) => {
-  var numberOfScores = 20
+ // Get X amount of Random Scores. Amount should be sent from client.
+ router.get('/random', async (request, response) => {
+   const databaseScoreCount = await Score.countDocuments()
+
+   var scoreArray = []
+
+   for (let i = 0; i < numberOfScores; i++) {
+    // Random value from score count.
+    random = Math.floor(Math.random() * databaseScoreCount)
+
+    // Push score by random skip.
+    scoreArray.push(Score.findOne().skip(random))
+   }
+ })
+
+/* router.get('/random', async (request, response) => {
+  var numberOfScores = request.body.amount
   var random = []
   var scores = []
   
@@ -161,14 +176,20 @@ router.get('/random', async (request, response) => {
     } catch (error) {
     response.json({ message: error })
   }
-})
+}) */
 
-// Get X amount of most recent scores.
+// Get X amount of most recent scores. Amount should be sent from client.
 router.get('/recent', async (request, response) => {
-  var numberOfScores = 20
-
   try {
     Score.find().sort({ dateWhenAdded: -1 }).limit(numberOfScores)
+  } catch (error) {
+    response.json({ message: error })
+  }
+})
+
+router.get('/popular', async (request, response) => {
+  try {
+    Score.find().sort({ likes: -1 }).limit(numberOfScores)
   } catch (error) {
     response.json({ message: error })
   }

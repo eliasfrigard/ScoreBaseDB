@@ -121,20 +121,18 @@ router.get('/', async (request, response) => {
     const databaseScoreCount = await Score.countDocuments()
 
     var scores = []
- 
     for (let i = 0; i < numberOfScores; i++) {
      // Random value from score count.
      random = Math.floor(Math.random() * databaseScoreCount)
  
      // Push score by random skip.
-     scoreArray.push(await Score.findOne().skip(random))
+     scores.push(await Score.findOne().skip(random))
     }
 
     response.json(scores)
    } catch (error) {
-     
+    response.json({ message: error })
    }
-
  })
 
 router.get('/recent', async (request, response) => {

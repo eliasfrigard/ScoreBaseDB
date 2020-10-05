@@ -13,6 +13,8 @@ const countryInput = document.querySelector('#country')
 const collectionsInput = document.querySelector('#collections')
 const tagsInput = document.querySelector('#tags')
 
+// Implement "offline" notification
+
 // Method for displaying filename in fileLabel when uploaded.
 fileBtn.addEventListener('change', event => {
   fileLabel.innerText = fileBtn.files[0].name

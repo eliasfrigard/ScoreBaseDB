@@ -1,0 +1,123 @@
+#content {
+/*   font-family: 'Ibarra Real Nova', serif;
+ */  letter-spacing: 1.5px;
+
+  height: 220px;
+  width: 300px;
+  border-radius: 5px;
+  text-align: center;
+
+  opacity: 90%;
+  background-color: white;
+  box-shadow: 0px 0px 8px 1px rgba(44, 62, 80, 0.3);
+
+
+  padding:5px;
+
+  transition:0.3s;
+
+  overflow: hidden;
+  cursor: pointer;
+}
+
+#content:hover {
+  opacity: 100%;
+  box-shadow: 0px 0px 8px 1px rgba(44, 62, 80, 0.4);
+
+/*   border: 0.3px solid #06305B;
+ */
+
+  transform: scaleY(1.015) scaleX(1.015);
+}
+
+#preview {
+  height: 90px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  margin-bottom: 3px;
+}
+
+#preview::-webkit-scrollbar {
+  display: none;
+}
+
+#header {
+  height: 65px;
+}
+
+#header {
+  line-height: 0.4;
+}
+
+#download {
+  transition:0.4s;
+}
+
+#download:hover {
+  transform: rotate(-90deg);
+}
+
+.button {
+  height: 33px;
+  width: 33px;
+  padding: 5px;
+
+  transition: 0.4s;
+}
+
+.button:hover {
+  opacity: 70%;
+}
+
+#buttons {
+  display:none;
+  height: 45px;
+}
+
+#favorite {
+  transition: 0.4s;
+}
+
+#favorite:hover {
+  transition: 0.4s;
+	content: url("/images/controls/favorite-button-hover.png");
+}
+
+#pause, #favoriteChecked {
+  display:none;
+}
+
+#title, #composer {
+  line-height: 9px;
+}
+
+#title {
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+#composer {
+  font-weight: bold;
+  font-size: 14px;
+  opacity: 80%;
+}
+
+#origin {
+  font-size: 12px;
+  line-height: 6px;
+}
+
+#loadSymbol {
+  display: none;
+  margin-left: auto;
+  margin-right: auto;  
+  margin-top: 25px;
+  width:30px;
+  margin-left:46%;
+  animation: spin 1.5s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

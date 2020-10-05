@@ -18,6 +18,7 @@ let options = {
 }
 
 // Serve static assets.
+application.use(express.static('static', options))
 application.use(express.static('static/mxl', options))
 application.use(express.static('static/unverified', options))
 

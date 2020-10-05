@@ -143,3 +143,16 @@ input[type=submit]:hover {
 #instructionList p {
   margin: 20px;
 }
+
+a {
+  transition: transform 50ms ease-out;
+}
+
+a:link, a:visited, a:hover, a:active {
+  color: white;
+  text-decoration: none;
+}
+
+a:hover {
+  color: rgb(196, 41, 41);
+}

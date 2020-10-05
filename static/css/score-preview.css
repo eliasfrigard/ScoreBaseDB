@@ -83,7 +83,7 @@
 	content: url("/images/controls/favorite-button-hover.png");
 }
 
-#pause, #favoriteChecked {
+#pause, #checkedLike {
   display:none;
 }
 

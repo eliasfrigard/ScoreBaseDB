@@ -136,48 +136,6 @@ router.get('/', async (request, response) => {
    }
  })
 
-/* router.get('/random', async (request, response) => {
-  var numberOfScores = request.body.amount
-  var random = []
-  var scores = []
-  
-  try {
-    // Place all scores in an array.
-    const allScores = await Score.find()
-
-    // All all score ID's to the array.
-    for (let i = 0; i < allScores.length; i++) {
-      random[i] = allScores[i]._id
-    }
-
-    // Use randomization algorithm.
-    var currentIndex = random.length
-    var temporaryValue
-    var randomIndex
-
-    // Algorithm randomizes the order of ID's in the array.
-    while (currentIndex !== 0) {
-      randomIndex = Math.floor(Math.random() * currentIndex)
-      currentIndex -= 1
-
-      temporaryValue = random[currentIndex]
-      random[currentIndex] = random[randomIndex]
-      random[randomIndex] = temporaryValue
-    }
-
-    // Places X amount of Scores from the start of the list to be returned.
-    for (let i = 0; i < numberOfScores; i++) {
-      const score = await Score.findOne({ _id: random[i] })
-      scores[i] = score
-    }
-
-    // Respond with the Score array.
-    response.json(scores)
-    } catch (error) {
-    response.json({ message: error })
-  }
-}) */
-
 // Get X amount of most recent scores. Amount should be sent from client.
 router.get('/recent', async (request, response) => {
   try {

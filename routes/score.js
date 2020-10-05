@@ -116,30 +116,31 @@ router.get('/', async (request, response) => {
   }
 })
 
-/**
- * Implement different getters for Scores in the future.
- * For now it will suffice with returning the whole score registry.
- */
-
- // Get X amount of Random Scores. Amount should be sent from client.
  router.get('/random', async (request, response) => {
-   const databaseScoreCount = await Score.countDocuments()
+   try {
+    const databaseScoreCount = await Score.countDocuments()
 
-   var scoreArray = []
+    var scores = []
+ 
+    for (let i = 0; i < numberOfScores; i++) {
+     // Random value from score count.
+     random = Math.floor(Math.random() * databaseScoreCount)
+ 
+     // Push score by random skip.
+     scoreArray.push(await Score.findOne().skip(random))
+    }
 
-   for (let i = 0; i < numberOfScores; i++) {
-    // Random value from score count.
-    random = Math.floor(Math.random() * databaseScoreCount)
-
-    // Push score by random skip.
-    scoreArray.push(Score.findOne().skip(random))
+    response.json(scores)
+   } catch (error) {
+     
    }
+
  })
 
-// Get X amount of most recent scores. Amount should be sent from client.
 router.get('/recent', async (request, response) => {
   try {
-    Score.find().sort({ dateWhenAdded: -1 }).limit(numberOfScores)
+    const scores = await Score.find().sort({ dateWhenAdded: -1 }).limit(numberOfScores)
+    response.json(scores)
   } catch (error) {
     response.json({ message: error })
   }
@@ -147,7 +148,8 @@ router.get('/recent', async (request, response) => {
 
 router.get('/popular', async (request, response) => {
   try {
-    Score.find().sort({ likes: -1 }).limit(numberOfScores)
+    const scores = await Score.find().sort({ likes: -1 }).limit(numberOfScores)
+    response.json(scores)
   } catch (error) {
     response.json({ message: error })
   }

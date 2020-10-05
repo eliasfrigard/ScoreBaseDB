@@ -11,6 +11,7 @@ const health = require('express-ping');
 
 application.use(cors())
 application.use(bodyparser.json())
+application.use(health.ping())
 
 let options = {
   dotfiles: "ignore",
@@ -22,7 +23,6 @@ let options = {
 application.use(express.static('static', options))
 application.use(express.static('static/mxl', options))
 application.use(express.static('static/unverified', options))
-application.use(health.ping())
 
 /* application.use(express.static(path.join(__dirname, 'static/mxl')))
 application.use(express.static(path.join(__dirname, 'static/midi')))

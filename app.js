@@ -24,7 +24,12 @@ application.use(express.static('static', options))
 application.use(express.static('static/mxl', options))
 application.use(express.static('static/unverified', options))
 application.use(express.static('static/css', options))
+
 application.use(express.static('static/img', options))
+application.use(express.static('static/img/lang-icons', options))
+application.use(express.static('static/img/score-preview', options))
+application.use(express.static('static/img/menu-icons', options))
+
 
 /* application.use(express.static(path.join(__dirname, 'static/mxl')))
 application.use(express.static(path.join(__dirname, 'static/midi')))

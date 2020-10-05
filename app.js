@@ -7,6 +7,7 @@ const mongoose = require('mongoose')
 const bodyparser = require('body-parser')
 const cors = require('cors')
 const path = require('path')
+const health = require('express-ping');
 
 application.use(cors())
 application.use(bodyparser.json())
@@ -21,6 +22,7 @@ let options = {
 application.use(express.static('static', options))
 application.use(express.static('static/mxl', options))
 application.use(express.static('static/unverified', options))
+application.use(health.ping())
 
 /* application.use(express.static(path.join(__dirname, 'static/mxl')))
 application.use(express.static(path.join(__dirname, 'static/midi')))
